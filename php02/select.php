@@ -2,13 +2,14 @@
 //1.  DB接続します
 try {
   //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('*******:dbname=****;charset=utf8;host=*****','****','*****');
+  $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
 } catch (PDOException $e) {
-  exit('***************'.$e->getMessage());
+  exit('DBConnection Error:'.$e->getMessage());
 }
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("************* *****");
+$sql = "SELECT * FROM gs_an_table;";
+$stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
 
 //３．データ表示
@@ -16,13 +17,15 @@ $view="";
 if($status==false) {
     //execute（SQL実行時にエラーがある場合）
   $error = $stmt->errorInfo();
-  exit("**********:".$error[2]);
+  exit("SQL_Error:".$error[2]);
 
 }else{
   //Selectデータの数だけ自動でループしてくれる
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
-    $view .= "**********";
+    $view .= '<p>';
+    $view .= $res['id'].', '.$res['name'];
+    $view .= '</p>';
   }
 
 }
@@ -55,7 +58,7 @@ if($status==false) {
 
 <!-- Main[Start] -->
 <div>
-    <div class="container jumbotron"><?=**********?></div>
+    <div class="container jumbotron"><?=$view?></div>
 </div>
 <!-- Main[End] -->
 

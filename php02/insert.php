@@ -32,6 +32,6 @@ if($status==false){
 }else{
   //５．index.phpへリダイレクト
   header("Location: index.php");
-
+  exit();
 }
 ?>
