@@ -2,7 +2,7 @@
 //1.  DB接続します
 try {
   //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=gskadai_db;charset=utf8;host=localhost','root','');
+  $pdo = new PDO('mysql:dbname=kawachan_gskadai_db;charset=utf8;host=mysql57.kawachan.sakura.ne.jp,kawachan,gskadai_db');
 } catch (PDOException $e) {
   exit('DBConnection Error:'.$e->getMessage());
 }
