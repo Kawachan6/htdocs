@@ -1,27 +1,27 @@
 <?php
 //1. POSTデータ取得
 //$name = filter_input( INPUT_GET, ","name" ); //こういうのもあるよ
-//$email = filter_input( INPUT_POST, "email" ); //こういうのもあるよ
+//$url = filter_input( INPUT_POST, "url" ); //こういうのもあるよ
 $name = $_POST["name"];
-$email = $_POST["email"];
-$naiyou = $_POST["naiyou"];
+$url = $_POST["url"];
+$comment = $_POST["comment"];
 
 
 
 //2. DB接続します
 try {
   //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
+  $pdo = new PDO('mysql:dbname=gskadai_db;charset=utf8;host=localhost','root','');
 } catch (PDOException $e) {
   exit('DB Connection Error:'.$e->getMessage());
 }
 
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO gs_an_table(name,email,naiyou,indate)VALUES(:name, :email, :naiyou, sysdate());");
+$stmt = $pdo->prepare("INSERT INTO gs_bm_table(name,url,comment,indate)VALUES(:name, :url, :comment, sysdate());");
 $stmt->bindValue(':name', $name, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue('email', $email, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
-$stmt->bindValue('naiyou', $naiyou, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue('url', $url, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
+$stmt->bindValue('comment', $comment, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
 $status = $stmt->execute();
 
 //４．データ登録処理後
