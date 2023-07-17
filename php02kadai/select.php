@@ -1,8 +1,11 @@
 <?php
+require_once("funcs.php"); //追記
+
 //1.  DB接続します
 try {
   //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=kawachan_gskadai_db;charset=utf8;host=mysql57.kawachan.sakura.ne.jp,kawachan,gskadai_db');
+  $pdo = new PDO('mysql:dbname=kawachan_gskadai_db;charset=utf8;host=mysql57.kawachan.sakura.ne.jp','kawachan','gskadai_db');
+  // $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
 } catch (PDOException $e) {
   exit('DBConnection Error:'.$e->getMessage());
 }
@@ -24,7 +27,7 @@ if($status==false) {
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
     $view .= '<p>';
-    $view .= $res['id'].', '.$res['name'];
+    $view .= h($res['id'].', '.$res['name']);
     $view .= '</p>';
   }
 
