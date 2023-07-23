@@ -3,7 +3,7 @@
 function h($str){
     return htmlspecialchars($str, ENT_QUOTES);
 }
-​
+
 //DB接続関数：db_conn()
 function db_conn(){
     try {
@@ -12,7 +12,7 @@ function db_conn(){
         $db_id   = "root";      //アカウント名
         $db_pw   = "";          //パスワード：XAMPPはパスワード無しに修正してください。
         $db_host = "localhost"; //DBホスト
-​
+
         //localhost以外＊＊自分で書き直してください！！＊＊
         if($_SERVER["HTTP_HOST"] != 'localhost'){
             $db_name = "";  //データベース名
@@ -25,17 +25,15 @@ function db_conn(){
         exit('DB Connection Error:'.$e->getMessage());
     }
 }
-​
+
 //SQLエラー関数：sql_error($stmt)
-function sql_error($stmt){
-    $error = $stmt->errorInfo();
-    exit("SQLError:".$error[2]);
-}
-​
-​
+
+
+
 //リダイレクト関数: redirect($file_name)
-function redirect($file_name){
-    // header("Location: index.php");
-    header("Location: ".$file_name);
-}
-?>
+
+
+
+
+
+
