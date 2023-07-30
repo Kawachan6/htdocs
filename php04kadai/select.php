@@ -1,17 +1,11 @@
 <?php
-// require_once("funcs.php"); //追記
-
 //1.  DB接続します
-// try {
+try {
   //Password:MAMP='root',XAMPP=''
-  // $pdo = new PDO('mysql:dbname=kawachan_gskadai_db;charset=utf8;host=mysql57.kawachan.sakura.ne.jp','kawachan','gskadai_db');
-  // $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
-// } catch (PDOException $e) {
-  // exit('DBConnection Error:'.$e->getMessage());
-// }
-include("funcs.php");  //funcs.phpを読み込む（関数群）
-$pdo = db_conn();      //DB接続関数
-
+  $pdo = new PDO('mysql:dbname=gskadai_db;charset=utf8;host=localhost','root','');
+} catch (PDOException $e) {
+  exit('DBConnection Error:'.$e->getMessage());
+}
 
 //２．データ登録SQL作成
 $sql = "SELECT * FROM gs_bm_table;";
@@ -30,7 +24,7 @@ if($status==false) {
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
     $view .= '<p>';
-    $view .= h($res['id'].', '.$res['name']);
+    $view .= $res['id'].', '.$res['name'];
     $view .= '</p>';
   }
 
@@ -44,7 +38,7 @@ if($status==false) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ブックマーク表示</title>
+<title>ブックマーク</title>
 <link rel="stylesheet" href="css/range.css">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <style>div{padding: 10px;font-size:16px;}</style>

@@ -19,14 +19,14 @@
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
-<form method="POST" action="insert.php">
+<form method="post" action="insert.php">
   <div class="jumbotron">
    <fieldset>
-    <legend>フリーアンケート</legend>
-     <label>名前：<input type="text" name="name"></label><br>
-     <label>Email：<input type="text" name="email"></label><br>
-     <label>年齢：<input type="text" name="age"></label><br>
-     <label><textArea name="naiyou" rows="4" cols="40"></textArea></label><br>
+    <legend>ブックマーク</legend>
+     <label>書籍名:<input type="text" name="name"></label><br>
+     <label>URL:<input type="text" name="url"></label><br>
+     <label>書籍コメント:</label><br>
+     <label><textArea name="comment" rows="4" cols="40"></textArea></label><br>
      <input type="submit" value="送信">
     </fieldset>
   </div>

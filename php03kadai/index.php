@@ -19,7 +19,7 @@
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
-<form method="post" action="insert.php">
+<form method="POST" action="insert.php">
   <div class="jumbotron">
    <fieldset>
     <legend>ブックマーク</legend>

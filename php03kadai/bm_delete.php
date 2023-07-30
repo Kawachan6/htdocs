@@ -3,13 +3,16 @@
 $id   = $_GET["id"];
 
 //2. DB接続します
-try {
+// try {
 	//Password:MAMP='root',XAMPP=''
-	$pdo = new PDO('mysql:dbname=kawachan_gskadai_db;charset=utf8;host=mysql57.kawachan.sakura.ne.jp','kawachan','gskadai_db');
+	// $pdo = new PDO('mysql:dbname=kawachan_gskadai_db;charset=utf8;host=mysql57.kawachan.sakura.ne.jp','kawachan','gskadai_db');
 	// $pdo = new PDO('mysql:dbname=gs_db;charset=utf8;host=localhost','root','');
-  } catch (PDOException $e) {
-	exit('DB Connection Error:'.$e->getMessage());
-  }
+//   } catch (PDOException $e) {
+	// exit('DB Connection Error:'.$e->getMessage());
+//   }
+include("funcs.php");  //funcs.phpを読み込む（関数群）
+$pdo = db_conn();      //DB接続関数
+
 
 //３．データ登録SQL作成
 $sql = "DELETE FROM gs_bm_table WHERE id=:id";

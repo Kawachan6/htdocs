@@ -1,27 +1,34 @@
 <?php
-include("funcs.php");  //funcs.phpを読み込む（関数群）
-$pdo = db_conn();      //DB接続関数
+//0. SESSION開始！！
+session_start();
+
+//１．関数群の読み込み
+include("funcs.php");
+
+//LOGINチェック → funcs.phpへ関数化しましょう！
+sschk();
+
 
 //２．データ登録SQL作成
-$stmt   = $pdo->prepare("SELECT * FROM gs_an_table"); //SQLをセット
-$status = $stmt->execute(); //SQLを実行→エラーの場合falseを$statusに代入
+$pdo = db_conn();
+$stmt = $pdo->prepare("SELECT * FROM gs_an_table");
+$status = $stmt->execute();
 
 //３．データ表示
-$view=""; //HTML文字列作り、入れる変数
+$view="";
 if($status==false) {
-  //SQLエラーの場合
   sql_error($stmt);
 }else{
-  //SQL成功の場合
-  while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){ //データ取得数分繰り返す
-    //以下でリンクの文字列を作成, $r["id"]でidをdetail.phpに渡しています
-    $view .= '<a href="detail.php?id='.h($r["id"]).'">';
-    $view .= h($r["id"])."|".h($r["name"])."|".h($r["email"]);
+  while( $r = $stmt->fetch(PDO::FETCH_ASSOC)){
+    $view .= '<p>';
+    $view .= '<a href="detail.php?id='.$r["id"].'">';
+    $view .= $r["id"]."|".$r["name"]."|".$r["email"];
     $view .= '</a>';
-    $view .= '<a href="delete.php?id='.h($r["id"]).'">';
-    $view .= '[削除]';
+    $view .= "　";
+    $view .= '<a class="btn btn-danger" href="delete.php?id='.$r["id"].'">';
+    $view .= '[<i class="glyphicon glyphicon-remove"></i>削除]';
     $view .= '</a>';
-    $view .= '<br>';
+    $view .= '</p>';
   }
 }
 ?>
@@ -45,6 +52,10 @@ if($status==false) {
     <div class="container-fluid">
       <div class="navbar-header">
       <a class="navbar-brand" href="index.php">データ登録</a>
+      <a class="navbar-brand" href="login.php">ログイン</a>
+      <a class="navbar-brand" href="logout.php">ログアウト</a>
+
+
       </div>
     </div>
   </nav>
